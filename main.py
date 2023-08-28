@@ -254,13 +254,13 @@ if add_sidebar == 'Individual Runs':
     'Avg. MPH', 'max_speed','average_heartrate','total_elevation_gain'   
 ]
     runs_metrics_final = runs_diff.loc[:,short_cols]
-    run_metrics_numeric = runs_metrics_final.median().index.tolist()
+    run_metrics_numeric = runs_metrics_final.median(numeric_only=True).index.tolist()
     df_to_pct = {}
     for i in run_metrics_numeric:
         df_to_pct[i] = '{:.1%}'.format
 
     maf_metrics_final = maf_diff.loc[:,short_cols]
-    maf_metrics_numeric = maf_metrics_final.median().index.tolist()
+    maf_metrics_numeric = maf_metrics_final.median(numeric_only=True).index.tolist()
     st.header('Runs compared to 6 month averages')
     st.dataframe(runs_metrics_final.style.hide().applymap(style_negative, props='color:red;').applymap(style_positive, props='color:green;').format(df_to_pct)) 
     st.header('MAF runs compared to 6 month averages')
